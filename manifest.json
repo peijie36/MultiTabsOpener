@@ -1,0 +1,10 @@
+{
+	"name": "Multi Tabs Opener",
+	"description": "A simple extension to open multiple tabs in one click.",
+	"version": "1.0",
+	"manifest_version": 3,
+	"action": {
+		"default_popup": "popup.html",
+    "default_icon": "peijie-avatar.png"
+	}
+}
