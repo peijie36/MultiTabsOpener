@@ -8,10 +8,16 @@ let linksToOpen = [
 	"https://www.linkedin.com/feed/",
 ];
 
-console.log("Test chrome extension");
 const openTabsButton = document.getElementById("open-multiple-tabs");
 openTabsButton.addEventListener("click", () => {
   linksToOpen.forEach((link) => {
     chrome.tabs.create({ url: link });
   });
 })
+
+const tabsList = document.getElementById("tabs-list");
+linksToOpen.forEach((link) => {
+  const listItem = document.createElement("li");
+  listItem.textContent = link;
+  tabsList.appendChild(listItem);
+});
