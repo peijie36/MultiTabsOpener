@@ -10,14 +10,18 @@ let linksToOpen = [
 
 const openTabsButton = document.getElementById("open-multiple-tabs");
 openTabsButton.addEventListener("click", () => {
-  linksToOpen.forEach((link) => {
-    chrome.tabs.create({ url: link });
+  linksToOpen.forEach((url) => {
+    chrome.tabs.create({ url: url });
   });
 })
 
 const tabsList = document.getElementById("tabs-list");
-linksToOpen.forEach((link) => {
+linksToOpen.forEach((url) => {
   const listItem = document.createElement("li");
-  listItem.textContent = link;
+  const urlItem = document.createElement("a");
+  urlItem.href = url;
+  urlItem.textContent = url;
+  urlItem.target = "_blank";
+  listItem.appendChild(urlItem);
   tabsList.appendChild(listItem);
 });
