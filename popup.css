@@ -11,6 +11,17 @@ h1 {
   color: #333;
 }
 
+label {
+  margin-left: 2rem;
+  font-size: 16px;
+  display: block;
+}
+
+input {
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+
 ul {
   margin: 0;
   list-style: url(); 
@@ -28,7 +39,8 @@ a {
   text-decoration: none;
 }
 
-button {
+#open-multiple-tabs-button {
+  text-align: center;
   display: block;
   margin: 20px auto;
   padding: 10px 10px;
