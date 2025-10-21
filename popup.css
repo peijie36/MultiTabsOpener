@@ -2,6 +2,7 @@ body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+  width: 330px;
 }
 
 h1 {
@@ -49,5 +50,25 @@ a {
   border: none;
   border-radius: 5px;
   font-size: 16px;
+  cursor: pointer;
+}
+
+#add-link-button {
+  padding: 7px 10px;
+  background-color: lightgreen;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.remove-button {
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 9px;
+  margin-left: 3px;
   cursor: pointer;
 }
