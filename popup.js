@@ -2,9 +2,9 @@
 const addLinkButton = document.getElementById("add-link-button");
 addLinkButton.addEventListener("click", () => {
   const url = document.getElementById("add-link").value;
-  chrome.storage.local.get(["linksToOpen"], ({ linksToOpen }) => {
+  chrome.storage.local.get(["linksToOpen"], ({ linksToOpen = [] }) => {
     linksToOpen.push(url);
-    chrome.storage.local.set({ linksToOpen: linksToOpen }, function () {
+    chrome.storage.local.set({ linksToOpen: linksToOpen }, () => {
       if (chrome.runtime.lastError) {
         console.error("Error saving lists:", chrome.runtime.lastError);
       } else {
@@ -20,7 +20,7 @@ addLinkButton.addEventListener("click", () => {
 // Attaches event listener to open tabs button and opens all tabs
 const openTabsButton = document.getElementById("open-multiple-tabs-button");
 openTabsButton.addEventListener("click", () => {
-  chrome.storage.local.get(["linksToOpen"], ({ linksToOpen }) => {
+  chrome.storage.local.get(["linksToOpen"], ({ linksToOpen = [] }) => {
   linksToOpen.forEach((url) => {
     url = addHTTPSIfMissing(url);
     chrome.tabs.create({ url: url });
@@ -29,7 +29,7 @@ openTabsButton.addEventListener("click", () => {
 })
 
 // Retrieves list of links from chrome storage and displays them
-chrome.storage.local.get(["linksToOpen"], ({ linksToOpen }) => {
+chrome.storage.local.get(["linksToOpen"], ({ linksToOpen = [] }) => {
   if (chrome.runtime.lastError) {
 		console.error("Error retrieving array:", chrome.runtime.lastError);
   } else {
@@ -56,6 +56,11 @@ async function removeFromList(key, valueToRemove) {
 	await chrome.storage.local.set({ [key]: updatedList });
 }
 
+/**
+ * Adds "https://" to the start of a given URL if it is missing.
+ * @param {string} url The URL to add "https://" to if necessary.
+ * @returns {string} The URL with "https://" added if necessary.
+ */
 function addHTTPSIfMissing(url) {
   if (!url.includes("https")) {
 		url = "https://" + url;
@@ -63,6 +68,12 @@ function addHTTPSIfMissing(url) {
   return url;
 }
 
+/**
+ * Creates a new list item element with a link to the given URL and a
+ * button to remove the item from the list.
+ * @param {string} url The URL to create a list item for.
+ * @returns {HTMLElement} The created list item element.
+ */
 function createListItem(url) {
   const listItem = document.createElement("li");
   const urlItem = document.createElement("a");
